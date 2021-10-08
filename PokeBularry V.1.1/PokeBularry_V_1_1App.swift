@@ -11,7 +11,7 @@ import SwiftUI
 struct PokeBularry_V_1_1App: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            PokeDexView()
         }
     }
 }
