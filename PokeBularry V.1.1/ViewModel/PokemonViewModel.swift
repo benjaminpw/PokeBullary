@@ -53,6 +53,8 @@ class PokemonViewModel: ObservableObject {
         default: return .systemIndigo
         }
     }
+  // MOCK DESCRIPTION OF POKEMON 
+    let MOCK_POKEMON = Pokemon(id: 0, name: "Bulbasaur", imageUrl: "https://firebasestorage.googleapis.com/v0/b/pokedex-bb36f.appspot.com/o/pokemon_images%2F2CF15848-AAF9-49C0-90E4-28DC78F60A78?alt=media&", type: "poison", description: "This is a test example of what the text in the description would look like for the given pokemon. This is a test example of what the text in the description would look like for the given pokemon.", attack: 49, defense: 52, height: 10, weight: 98)
 }
 
 extension Data {
