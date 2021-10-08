@@ -19,7 +19,7 @@
 		4AFB0F9027101DF000F4ED21 /* PokemonImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFB0F8F27101DF000F4ED21 /* PokemonImage.swift */; };
 		4AFB0F922710211300F4ED21 /* PokeStatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFB0F912710211300F4ED21 /* PokeStatView.swift */; };
 		4AFB0F942710243A00F4ED21 /* PokeStatViewGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFB0F932710243A00F4ED21 /* PokeStatViewGroup.swift */; };
-		4AFB0F962710261B00F4ED21 /* PokeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFB0F952710261B00F4ED21 /* PokeDetailView.swift */; };
+		4AFB0F992710293100F4ED21 /* PokeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFB0F982710293100F4ED21 /* PokeDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,7 +35,7 @@
 		4AFB0F8F27101DF000F4ED21 /* PokemonImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonImage.swift; sourceTree = "<group>"; };
 		4AFB0F912710211300F4ED21 /* PokeStatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeStatView.swift; sourceTree = "<group>"; };
 		4AFB0F932710243A00F4ED21 /* PokeStatViewGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeStatViewGroup.swift; sourceTree = "<group>"; };
-		4AFB0F952710261B00F4ED21 /* PokeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeDetailView.swift; sourceTree = "<group>"; };
+		4AFB0F982710293100F4ED21 /* PokeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,7 +101,7 @@
 			children = (
 				4AFB0F84270FDDEA00F4ED21 /* PokemonCard.swift */,
 				4AFB0F86270FE16300F4ED21 /* PokeDexView.swift */,
-				4AFB0F952710261B00F4ED21 /* PokeDetailView.swift */,
+				4AFB0F982710293100F4ED21 /* PokeDetailView.swift */,
 				4AFB0F972710262600F4ED21 /* PokeDetailViewComponent */,
 			);
 			path = View;
@@ -205,7 +205,7 @@
 				4AFB0F85270FDDEA00F4ED21 /* PokemonCard.swift in Sources */,
 				4AFB0F8B270FE59F00F4ED21 /* PokemonViewModel.swift in Sources */,
 				4AFB0F922710211300F4ED21 /* PokeStatView.swift in Sources */,
-				4AFB0F962710261B00F4ED21 /* PokeDetailView.swift in Sources */,
+				4AFB0F992710293100F4ED21 /* PokeDetailView.swift in Sources */,
 				4AFB0F942710243A00F4ED21 /* PokeStatViewGroup.swift in Sources */,
 				4AFB0F73270FD97D00F4ED21 /* PokeBularry_V_1_1App.swift in Sources */,
 				4AFB0F89270FE36C00F4ED21 /* PokemonModel.swift in Sources */,

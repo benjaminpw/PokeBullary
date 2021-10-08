@@ -17,7 +17,7 @@ struct PokemonCard: View {
     init(pokemon: Pokemon, viewModel: PokemonViewModel) {
         self.pokemon = pokemon
         self.viewModel = viewModel
-        backgroundColor = Color(viewModel.backgroundColor(pokemon.type))
+        self.backgroundColor = Color(viewModel.backgroundColor(pokemon.type))
     }
     
     var body: some View {

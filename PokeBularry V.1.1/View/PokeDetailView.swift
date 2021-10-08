@@ -6,15 +6,48 @@
 //
 
 import SwiftUI
+import KingfisherSwiftUI
 
 struct PokeDetailView: View {
+    
+    var pokemon: Pokemon
+    @State private var scale: CGFloat = 0
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        GeometryReader { geo in
+            VStack {
+                Text(pokemon.name.capitalized)
+                    .font(.largeTitle)
+                Text(pokemon.type.capitalized)
+                    .italic()
+                
+                PokemonImage(image: KFImage(URL(string: pokemon.imageUrl)))
+                    .padding(.bottom, -100)
+                    .zIndex(1)
+                
+                ZStack {
+                    Rectangle()
+                        .edgesIgnoringSafeArea(.all)
+                        .frame(width: geo.size.width, height: geo.size.height)
+                        .foregroundColor(.gray)
+                    
+                    VStack {
+                        Text(pokemon.description.replacingOccurrences(of: "\n", with: ""))
+                            .foregroundColor(.white)
+                            .padding()
+                        
+                        PokeStatViewGroup(pokemon: pokemon)
+                            
+                    }
+                }
+            }
+            .navigationBarTitleDisplayMode(.inline)
+        }
     }
 }
 
 struct PokeDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        PokeDetailView()
+        PokeDetailView(pokemon: PokemonViewModel().MOCK_POKEMON)
     }
 }
