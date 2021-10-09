@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 
 struct Pokemon: Decodable, Identifiable {
-    let pokeID = UUID()
     
     let id: Int
     let name: String
