@@ -12,7 +12,7 @@ struct Pokemon: Decodable, Identifiable {
     
     let id: Int
     let name: String
-    var imageUrl = "imageUrl"
+    var imageUrl: String
     let type: String
     let description: String
     
@@ -26,7 +26,7 @@ struct Pokemon: Decodable, Identifiable {
 enum CodingKeys: String, CodingKey {
     case id
     case name
-    case imageURL = "imageUrl"
+    case imageURL
     case type
     case description
     case attack

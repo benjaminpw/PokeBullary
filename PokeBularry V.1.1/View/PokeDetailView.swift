@@ -11,7 +11,6 @@ import KingfisherSwiftUI
 struct PokeDetailView: View {
     
     var pokemon: Pokemon
-    @State private var scale: CGFloat = 0
     
     @State var successCatch = false
     @State var failedCatch = false
@@ -49,13 +48,13 @@ struct PokeDetailView: View {
                                 .font(.system(size: 20))
                             
                         }).sheet(isPresented: $successCatch, content: {
-                            Text("Sucsessfull catching pokemon")
-                                .foregroundColor(.black)
+                            SuccessAddModal(isPresented: self.$successCatch)
                         })
                             .sheet(isPresented: $failedCatch, content: {
-                                Text("failed catching pokemon")
-                                    .foregroundColor(.black)
+                                FailedAddModal(isPresented: self.$failedCatch)
                             })
+                        
+                        // CATCH BUTTON PROPERTY
                             .foregroundColor(.white)
                             .padding(.horizontal, 15)
                             .padding(.vertical, 10)
@@ -76,7 +75,7 @@ struct PokeDetailView: View {
         }
     }
     
-    // function untuk catch pokemon dengan probabilitas 50%
+    // Function untuk catch pokemon dengan probabilitas 50%
     
     func catchPokemon(n: Int)  {
         
@@ -86,8 +85,44 @@ struct PokeDetailView: View {
             failedCatch = true
         }
     }
+}
+
+//STRUCT ketika catch berhasil
+struct SuccessAddModal: View {
     
+    @Binding var isPresented: Bool
     
+    var body: some View {
+        VStack {
+            Text("Add catched pokemon")
+                .foregroundColor(.black)
+            Button(action: {
+                self.isPresented = false
+            }, label: {
+                Text("Cancel")
+                    .foregroundColor(.black)
+            })
+        }
+    }
+}
+
+//STRUCT ketika catch gagal
+struct FailedAddModal: View {
+    
+    @Binding var isPresented: Bool
+    
+    var body: some View {
+        VStack {
+            Text("Sorry The Pokemon run away")
+                .foregroundColor(.black)
+            Button(action: {
+                self.isPresented = false
+            }, label: {
+                Text("Cancel")
+                    .foregroundColor(.black)
+            })
+        }
+    }
 }
 
 struct PokeDetailView_Previews: PreviewProvider {
