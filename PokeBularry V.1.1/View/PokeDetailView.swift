@@ -13,6 +13,9 @@ struct PokeDetailView: View {
     var pokemon: Pokemon
     @State private var scale: CGFloat = 0
     
+    @State var successCatch = false
+    @State var failedCatch = false
+    
     var body: some View {
         GeometryReader { geo in
             VStack {
@@ -36,13 +39,23 @@ struct PokeDetailView: View {
                         .foregroundColor(.gray)
                     
                     VStack {
-                        
                         //BUTTON UNTUK CATCH
                         Button(action: {
                             print("tes masuk")
+                            catchPokemon(n: Int.random(in: 1...100))
                         }, label: {
                             Text("CATCH !")
+                                .fontWeight(.bold)
+                                .font(.system(size: 20))
+                            
+                        }).sheet(isPresented: $successCatch, content: {
+                            Text("Sucsessfull catching pokemon")
+                                .foregroundColor(.black)
                         })
+                            .sheet(isPresented: $failedCatch, content: {
+                                Text("failed catching pokemon")
+                                    .foregroundColor(.black)
+                            })
                             .foregroundColor(.white)
                             .padding(.horizontal, 15)
                             .padding(.vertical, 10)
@@ -54,13 +67,27 @@ struct PokeDetailView: View {
                             .padding()
                         
                         PokeStatViewGroup(pokemon: pokemon)
-                            
+                        
                     }
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
+            
         }
     }
+    
+    // function untuk catch pokemon dengan probabilitas 50%
+    
+    func catchPokemon(n: Int)  {
+        
+        if n % 2 == 1 {
+            successCatch = true
+        } else {
+            failedCatch = true
+        }
+    }
+    
+    
 }
 
 struct PokeDetailView_Previews: PreviewProvider {
