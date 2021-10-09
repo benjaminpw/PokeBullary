@@ -8,9 +8,12 @@
 import SwiftUI
 import KingfisherSwiftUI
 
+
 struct PokeDetailView: View {
     
+    
     var pokemon: Pokemon
+    
     
     @State var successCatch = false
     @State var failedCatch = false
@@ -47,8 +50,14 @@ struct PokeDetailView: View {
                                 .fontWeight(.bold)
                                 .font(.system(size: 20))
                             
+                            //SUCCESS CATCH MODAL
                         }).sheet(isPresented: $successCatch, content: {
-                            SuccessAddModal(isPresented: self.$successCatch)
+                            SuccessAddModal(isPresented: self.$successCatch, didAddPokemon: {
+                                
+                                PokemonList in
+                                print(PokemonList.nickname)
+                                
+                            })
                         })
                             .sheet(isPresented: $failedCatch, content: {
                                 FailedAddModal(isPresented: self.$failedCatch)
@@ -91,18 +100,44 @@ struct PokeDetailView: View {
 struct SuccessAddModal: View {
     
     @Binding var isPresented: Bool
+    @State var nickName = ""
+    
+    var didAddPokemon: (PokemonList) -> ()
     
     var body: some View {
         VStack {
-            Text("Add catched pokemon")
-                .foregroundColor(.black)
+            HStack (spacing: 16) {
+               Text("Pokemon Nickname")
+                    .foregroundColor(.black)
+                    .font(.system(size: 16))
+            TextField("Let's give your new Pokemon Name!", text: $nickName)
+                    .foregroundColor(.black)
+            }
+            
+            Button(action: {
+                self.isPresented = false
+                print("\(nickName)")
+                
+                self.didAddPokemon(.init(nickname: self.nickName, originName: self.nickName, image: "xxx"))
+                
+                
+            }, label: {
+                Text("Add")
+                    .padding(.horizontal, 150)
+                    .padding(.vertical,5)
+                    .foregroundColor(.white)
+                    .background(.green)
+            })
+            
             Button(action: {
                 self.isPresented = false
             }, label: {
                 Text("Cancel")
                     .foregroundColor(.black)
             })
+            Spacer()
         }
+        .padding(.all, 10)
     }
 }
 
