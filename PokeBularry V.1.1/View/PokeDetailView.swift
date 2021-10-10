@@ -11,7 +11,6 @@ import KingfisherSwiftUI
 
 struct PokeDetailView: View {
     
-    
     var pokemon: Pokemon
     
     
@@ -19,70 +18,75 @@ struct PokeDetailView: View {
     @State var failedCatch = false
     
     var body: some View {
-        GeometryReader { geo in
-            VStack {
-                
-                Text(pokemon.name.capitalized)
-                    .font(.largeTitle)
-                Text(pokemon.type.capitalized)
-                    .italic()
-                
-                
-                PokemonImage(image: KFImage(URL(string: pokemon.imageUrl)))
-                    .padding(.bottom, -150)
-                    .zIndex(1)
-                
-                ZStack {
+            GeometryReader { geo in
+                VStack {
                     
-                    Rectangle()
+                    Text(pokemon.name.capitalized)
+                        .font(.largeTitle)
+                    Text(pokemon.type.capitalized)
+                        .italic()
                     
-                        .edgesIgnoringSafeArea(.all)
-                        .frame(width: geo.size.width, height: geo.size.height)
-                        .foregroundColor(.gray)
                     
-                    VStack {
-                        //BUTTON UNTUK CATCH
-                        Button(action: {
-                            print("tes masuk")
-                            catchPokemon(n: Int.random(in: 1...100))
-                        }, label: {
-                            Text("CATCH !")
-                                .fontWeight(.bold)
-                                .font(.system(size: 20))
+                    PokemonImage(image: KFImage(URL(string: pokemon.imageUrl)))
+                        .padding(.bottom, -150)
+                        .zIndex(1)
+                    
+                    ZStack {
+                        
+                        Rectangle()
+                        
+                            .edgesIgnoringSafeArea(.all)
+                            .frame(width: geo.size.width, height: geo.size.height)
+                            .foregroundColor(.gray)
+                        
+                        VStack {
+                            
+                            //BUTTON UNTUK CATCH
+                            Button(action: {
+                                print("tes masuk")
+                                catchPokemon(n: Int.random(in: 1...100))
+                            }, label: {
+                                Text("CATCH !")
+                                    .fontWeight(.bold)
+                                    .font(.system(size: 20))
+                                // CATCH BUTTON PROPERTY
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal, 15)
+                                    .padding(.vertical, 10)
+                                    .background(.green)
+                                    .cornerRadius(20)
+                            })
                             
                             //SUCCESS CATCH MODAL
-                        }).sheet(isPresented: $successCatch, content: {
-                            SuccessAddModal(isPresented: self.$successCatch, didAddPokemon: {
-                                
-                                PokemonList in
-                                print(PokemonList.nickname)
-                                
-                            })
-                        })
-                            .sheet(isPresented: $failedCatch, content: {
-                                FailedAddModal(isPresented: self.$failedCatch)
-                            })
-                        
-                        // CATCH BUTTON PROPERTY
-                            .foregroundColor(.white)
-                            .padding(.horizontal, 15)
-                            .padding(.vertical, 10)
-                            .background(.green)
-                            .cornerRadius(20)
-                        
-                        Text(pokemon.description.replacingOccurrences(of: "\n", with: ""))
-                            .foregroundColor(.white)
-                            .padding()
-                        
-                        PokeStatViewGroup(pokemon: pokemon)
-                        
+                                .sheet(isPresented: $successCatch, content: {
+                                    SuccessAddModal(isPresented: self.$successCatch, didAddPokemon: {
+                                        
+                                        PokemonList in
+//                                        self.pokemonList.append(pokemonList)
+//                                      self.pokemonList.append(PokemonList)
+                                        
+                                    })
+                                })
+                            
+                            //FAILED CATCH MODAL
+                                .sheet(isPresented: $failedCatch, content: {
+                                    FailedAddModal(isPresented: self.$failedCatch)
+                                })
+                            
+                            
+                            Text(pokemon.description.replacingOccurrences(of: "\n", with: ""))
+                                .foregroundColor(.white)
+                                .padding()
+                            
+                            PokeStatViewGroup(pokemon: pokemon)
+                            
+                        }
                     }
                 }
+                .navigationBarTitleDisplayMode(.inline)
+                
             }
-            .navigationBarTitleDisplayMode(.inline)
-            
         }
-    }
     
     // Function untuk catch pokemon dengan probabilitas 50%
     
@@ -105,39 +109,48 @@ struct SuccessAddModal: View {
     var didAddPokemon: (PokemonList) -> ()
     
     var body: some View {
-        VStack {
-            HStack (spacing: 16) {
-               Text("Pokemon Nickname")
-                    .foregroundColor(.black)
-                    .font(.system(size: 16))
-            TextField("Let's give your new Pokemon Name!", text: $nickName)
-                    .foregroundColor(.black)
+        NavigationView {
+            VStack {
+                HStack (spacing: 16) {
+                    Text("NICKNAME")
+                        .foregroundColor(.black)
+                        .font(.system(size: 16))
+                    TextField("Give name to your new Pokemon!", text: $nickName)
+                        .foregroundColor(.black)
+                    
+                }
+                
+                Button(action: {
+//                    self.isPresented = false
+                    print("\(nickName)")
+                    
+                    //ADD POKEMON
+                    self.didAddPokemon(.init(nickname: self.nickName, originName: self.nickName, image: "xxx"))
+                    
+                    
+                }, label: {
+                    Text("Add")
+                        .padding(.horizontal, 150)
+                        .padding(.vertical,5)
+                        .foregroundColor(.white)
+                        .background(.green)
+                })
+                
+                Button(action: {
+                    self.isPresented = false
+                }, label: {
+                    Text("Cancel")
+                        .foregroundColor(.black)
+                })
+                
+                
+                Spacer()
+                
             }
+            .padding(.all, 10)
+            .navigationTitle("Name your Pokemon")
             
-            Button(action: {
-                self.isPresented = false
-                print("\(nickName)")
-                
-                self.didAddPokemon(.init(nickname: self.nickName, originName: self.nickName, image: "xxx"))
-                
-                
-            }, label: {
-                Text("Add")
-                    .padding(.horizontal, 150)
-                    .padding(.vertical,5)
-                    .foregroundColor(.white)
-                    .background(.green)
-            })
-            
-            Button(action: {
-                self.isPresented = false
-            }, label: {
-                Text("Cancel")
-                    .foregroundColor(.black)
-            })
-            Spacer()
         }
-        .padding(.all, 10)
     }
 }
 
@@ -160,8 +173,11 @@ struct FailedAddModal: View {
     }
 }
 
+
+
 struct PokeDetailView_Previews: PreviewProvider {
     static var previews: some View {
         PokeDetailView(pokemon: PokemonViewModel().MOCK_POKEMON)
     }
 }
+
